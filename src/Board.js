@@ -1,34 +1,25 @@
 import React, { Component } from 'react'
-import './App.css'
 
 import { Subscribe } from 'unstated'
 import AppContainer from './provider/container/AppContainer'
 
-import Board from './Board'
-
-class App extends Component {
+class Board extends Component {
     render() {
         return (
         <Subscribe to={[AppContainer]}>
             {
                 app => {
 
-                    console.log('app', app, app._listeners.length)
+                    console.log('board', app, app._listeners.length)
 
                     return (
-                    <div className='App'>
+                    <div className='Board'>
 
                         { app.state.tick }
 
                         <button onClick={ _ => app.addTick() }>
                             Add
                         </button>
-
-                        <Board />
-
-                        <Board />
-
-                        <Board />
 
                     </div>
                     )
@@ -39,4 +30,4 @@ class App extends Component {
     }
 }
 
-export default App
+export default Board
