@@ -7,6 +7,11 @@ import AppContainer from './provider/container/AppContainer'
 import Board from './Board'
 
 class App extends Component {
+
+    state = {
+        pending : false
+    }
+
     render() {
         return (
         <Subscribe to={[AppContainer]}>
@@ -29,6 +34,22 @@ class App extends Component {
                         <Board />
 
                         <Board />
+
+
+
+                        <button onClick={ _ =>
+                            !this.state.pending && (this.setState({ pending : true }),
+                                                    app.fetchData()
+                                                        .then(e => (
+                                                            alert(e),
+                                                            this.setState({ pending : false }))))
+                        }>
+                            { this.state.pending ? 'Loading..' : 'fetchData' }
+                        </button>
+
+
+                        { app.state.data.map(e => <p key={ e.key }> { e.content }</p>) }
+
 
                     </div>
                     )
